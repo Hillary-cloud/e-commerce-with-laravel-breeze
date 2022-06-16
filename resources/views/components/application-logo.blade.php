@@ -1,0 +1,1 @@
+<img src="{{asset('assets/images/logo.png')}}" width="300px" alt="Application Logo">
