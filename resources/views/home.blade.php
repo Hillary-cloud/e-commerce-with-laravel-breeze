@@ -8,6 +8,11 @@
        display: block !important;
    }
 </style>
+            @if (Session::has('message'))
+               <div class="alert alert-success">
+                   <strong>Success: </strong> {{Session::get('message')}}
+               </div>
+            @endif
     
             <!-- slider section -->
             <section class="slider_section ">
@@ -181,9 +186,11 @@
                       <div class="box">
                          <div class="option_container">
                             <div class="options">
-                                 <a href="" class="option1">
-                                    Add To Cart
-                                 </a>
+                                 <form action="{{route('cart',$product->id)}}" method="POST">
+                                    @csrf
+                                    <input type="number" name="quantity" value="1" min="1" id="">
+                                    <input type="submit" value="Add To Cart">
+                                 </form>
                                <a href="{{route('productDetail',$product->id)}}" class="option2">
                                Buy Now
                                </a>

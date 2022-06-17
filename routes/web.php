@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('/');
 Route::get('/product/{id}', [ProductDetailController::class, 'productDetail'])->name('productDetail');
 
+
 // Route::get('/', function () {
 //     return view('home');
 // })->middleware(['auth','verified'])->name('/');
@@ -41,6 +42,10 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/admin/product/edit/{id}', [ProductController::class, 'editProduct'])->name('admin.editProduct');
     Route::put('/admin/product/edit/{id}', [ProductController::class, 'updateProduct'])->name('admin.updateProduct');
     Route::get('/admin/product/delete/{id}', [ProductController::class, 'deleteProduct'])->name('admin.deleteProduct');
+
+    Route::post('/cart/{id}', [HomeController::class, 'addToCart'])->name('cart');
+    Route::get('/cart', [HomeController::class, 'cart'])->name('showCart');
+    Route::get('/cart/delete/{id}', [HomeController::class, 'deleteCart'])->name('deleteCart');
 });
 
 

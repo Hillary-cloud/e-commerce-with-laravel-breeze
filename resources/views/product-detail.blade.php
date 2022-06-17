@@ -41,13 +41,22 @@
                 </div>
              </div>
     </div> --}}
-
+    @if (Session::has('message'))
+    <div class="alert alert-success">
+        <strong>Success: </strong> {{Session::get('message')}}
+    </div>
+ @endif
    <div class="container">
+    <h3 class="text-success">{{ucfirst($product->title)}}</h3>
+    <div class="card">
+      <div class="card-shadow">
        <div class="row">
-        <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12">
-            <h3 class="text-success">{{ucfirst($product->title)}}</h3>
-            <img src="product/{{$product->image}}" alt=""  width="100%">
-        
+         
+          <div class=" col-6 text-center">
+            
+            <img src="product/{{$product->image}}" alt=""  width="80%">
+        </div>
+       <div class="col-6 " style="padding-top: 5%">
                 <h5 class="text-success">
                      {{ucfirst($product->title)}}
                 </h5>
@@ -72,7 +81,14 @@
                      Price: ${{$product->price}}
                   </h6>
                 @endif
-                <a href="" class="btn btn-primary">Add to Cart</a>
+                <form action="{{route('cart',$product->id)}}" method="POST">
+                  @csrf
+                  <input type="number" name="quantity" value="1" min="1" id="">
+                  <input type="submit" value="Add To Cart">
+               </form>
+         </div>
+        </div>
+                
                 </div>
    </div>
 @endsection
